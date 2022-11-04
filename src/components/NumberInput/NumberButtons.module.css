@@ -1,0 +1,13 @@
+.numberButtons{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 230px;
+    height: 230px;
+    gap: 10px;
+}
+
+.button{
+    width: 60px;
+    height: 50px;
+}

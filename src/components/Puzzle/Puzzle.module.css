@@ -1,0 +1,8 @@
+.puzzle {
+    width: 900px;
+    height: 900px;
+    outline: 4px #000 solid;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+}

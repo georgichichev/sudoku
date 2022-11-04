@@ -1,0 +1,7 @@
+.box {
+    width: 300px;
+    height: 300px;
+    outline: 2px #000 solid;
+    display: flex;
+    flex-wrap: wrap;
+}
