@@ -28,7 +28,9 @@ export const PuzzleAuth = ({children}) =>{
 
             newBox[selectedCell.cellIndex].notes.push(numberInput);
 
-            setPuzzle([...puzzle, newBox]);
+            puzzle.splice(selectedCell.boxIndex, 1, newBox);
+
+            setPuzzle([...puzzle]);
 
             return;
         }
@@ -50,8 +52,9 @@ export const PuzzleAuth = ({children}) =>{
 
         newBox[selectedCell.cellIndex] = {value: Number(numberInput), prefilled: false, notes: []};
 
+        puzzle.splice(selectedCell.boxIndex, 1, newBox);
 
-        setPuzzle([...puzzle, newBox]);
+        setPuzzle([...puzzle]);
     };
 
     return(
