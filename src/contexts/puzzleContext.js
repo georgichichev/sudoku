@@ -26,7 +26,12 @@ export const PuzzleAuth = ({children}) =>{
         if (candidateMode){
             const newBox = puzzle[selectedCell.boxIndex];
 
-            newBox[selectedCell.cellIndex].notes.push(numberInput);
+            if(newBox[selectedCell.cellIndex].notes.includes(numberInput)){
+                newBox[selectedCell.cellIndex].notes = newBox[selectedCell.cellIndex].notes.filter(x => x != numberInput);
+            }
+            else{
+                newBox[selectedCell.cellIndex].notes.push(numberInput);
+            }
 
             puzzle.splice(selectedCell.boxIndex, 1, newBox);
 
