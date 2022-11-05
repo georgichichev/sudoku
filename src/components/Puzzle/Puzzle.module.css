@@ -6,3 +6,8 @@
     flex-wrap: wrap;
     overflow: hidden;
 }
+
+.puzzleCorrect{
+    /*outline: 6px #2de128 solid;*/
+    background-color: #2de128;
+}

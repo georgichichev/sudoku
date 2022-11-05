@@ -142,3 +142,43 @@ export const columnGenerator = (puzzle, boxIndex, cellIndex) =>{
 
     return column
 }
+
+export const conflictChecker = (puzzle) =>{
+    for (let i = 0; i <= 8; i++) {
+        for (let j = 0; j <= 8; j++) {
+            const row = rowGenerator(puzzle, i, j);
+
+            if (row.length !== new Set(row).size){
+                return true
+            }
+        }
+    }
+
+    for (let i = 0; i <= 8; i++) {
+        for (let j = 0; j <= 8; j++) {
+            const column = columnGenerator(puzzle, i, j);
+
+            if (column.length !== new Set(column).size){
+                return true
+            }
+        }
+    }
+
+    puzzle.map(x => {
+        if (x.length !== new Set(x).size){
+            return true
+        }
+    })
+};
+
+export const isComplete = (puzzle) =>{
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+            if (typeof puzzle[i][j].value !== 'number'){
+                return false
+            }
+        }
+    }
+
+    return true
+};

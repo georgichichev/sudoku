@@ -1,13 +1,13 @@
 import {createContext, useState} from "react";
 import {board} from "../assests/board.js";
-import {rowGenerator, columnGenerator} from "../assests/util.js";
+import {rowGenerator, columnGenerator, isComplete, conflictChecker} from "../assests/util.js";
 
 export const PuzzleContext = createContext();
 
 export const PuzzleAuth = ({children}) =>{
     const [puzzle, setPuzzle] = useState(board);
     const [selectedCell, setSelectedCell] = useState({boxIndex: null, cellIndex: null});
-    const [conflict, setConflict] = useState(false);
+    const [conflict, setConflict] = useState(true);
     const [candidateMode, setCandidateMode] = useState(false);
 
     const onCellClick = (e, boxIndex, cellIndex) =>{
@@ -40,19 +40,6 @@ export const PuzzleAuth = ({children}) =>{
             return;
         }
 
-        if (puzzle[selectedCell.boxIndex].filter(x => x.value == numberInput).length > 0){
-            setConflict(true);
-        }
-        else if(rowGenerator(puzzle, selectedCell.boxIndex, selectedCell.cellIndex).includes(Number(numberInput))){
-            setConflict(true);
-        }
-        else if(columnGenerator(puzzle, selectedCell.boxIndex, selectedCell.cellIndex).includes(Number(numberInput))){
-            setConflict(true);
-        }
-        else {
-            setConflict(false);
-        }
-
         const newBox = puzzle[selectedCell.boxIndex];
 
         newBox[selectedCell.cellIndex] = {value: Number(numberInput), prefilled: false, notes: []};
@@ -60,6 +47,10 @@ export const PuzzleAuth = ({children}) =>{
         puzzle.splice(selectedCell.boxIndex, 1, newBox);
 
         setPuzzle([...puzzle]);
+
+        if (isComplete(puzzle)){
+            setConflict(conflictChecker(puzzle));
+        }
     };
 
     return(

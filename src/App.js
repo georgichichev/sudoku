@@ -10,7 +10,7 @@ function App() {
             <PuzzleAuth>
                 <Puzzle/>
                 <NumberInput/>
-                <ConflictMessage/>
+                {/*<ConflictMessage/>*/}
             </PuzzleAuth>
         </div>
     );
